@@ -688,9 +688,14 @@ h1, h2, h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: -450px;
+  object-position:center;;
 }
 
+@media (min-width: 1024px) {
+  .sentra-card img {
+    object-position: -450px; /* Baru aktif di layar besar */
+  }
+}
 .sentra-card:hover {
   border-color: rgba(212, 168, 67, 0.22);
   box-shadow:
