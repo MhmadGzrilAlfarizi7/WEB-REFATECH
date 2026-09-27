@@ -373,6 +373,215 @@ h1, h2, h3 {
 }
 
 
+/* ---------- 9b. ASISTEN AI KAGANGA ---------- */
+
+.ai-assistant-wrapper {
+  position: relative;
+}
+
+/* Decorative divider above AI section */
+.ai-assistant-wrapper::before {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 232, 123, 0.4), transparent);
+  margin: 0 auto 2rem;
+}
+
+/* AI icon pulse animation */
+.ai-icon-pulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-icon-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 232, 123, 0.15), transparent 70%);
+  animation: aiPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes aiPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%      { transform: scale(1.4); opacity: 0;   }
+}
+
+/* GPT-Powered badge */
+.ai-badge {
+  background: linear-gradient(135deg, rgba(0, 232, 123, 0.15), rgba(0, 232, 123, 0.05));
+  border: 1px solid rgba(0, 232, 123, 0.25);
+  color: #00e87b;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+}
+
+/* Chat messages area */
+.ai-chat-area {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 168, 67, 0.3) transparent;
+}
+
+.ai-chat-area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ai-chat-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ai-chat-area::-webkit-scrollbar-thumb {
+  background: rgba(212, 168, 67, 0.3);
+  border-radius: 4px;
+}
+
+/* AI Avatar */
+.ai-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0, 232, 123, 0.2), rgba(0, 232, 123, 0.05));
+  border: 1px solid rgba(0, 232, 123, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #00e87b;
+  letter-spacing: 0.05em;
+}
+
+/* User Avatar */
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(212, 168, 67, 0.2), rgba(212, 168, 67, 0.05));
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #d4a843;
+}
+
+/* Chat Bubbles */
+.ai-bubble {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(0, 232, 123, 0.1);
+  border-radius: 4px 16px 16px 16px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #d1d1d8;
+  max-width: 85%;
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, rgba(212, 168, 67, 0.12), rgba(212, 168, 67, 0.04));
+  border: 1px solid rgba(212, 168, 67, 0.18);
+  border-radius: 16px 4px 16px 16px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #e8e0d0;
+  max-width: 85%;
+}
+
+/* Typing Indicator */
+.typing-bubble {
+  padding: 14px 20px;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00e87b;
+  opacity: 0.4;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.4; }
+  30%           { transform: translateY(-8px); opacity: 1;   }
+}
+
+/* Send Button */
+.ai-send-btn {
+  background: linear-gradient(135deg, #00e87b, #00c066);
+  color: #0a0a0f;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-send-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.ai-send-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.ai-send-btn:hover {
+  box-shadow: 0 0 24px rgba(0, 232, 123, 0.3), 0 0 60px rgba(0, 232, 123, 0.1);
+  transform: translateY(-1px);
+}
+
+.ai-send-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.ai-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading state */
+.ai-btn-loading {
+  pointer-events: none;
+}
+
+.ai-btn-loading span {
+  opacity: 0.6;
+}
+
+/* AI Input focus */
+#aiInput:focus {
+  border-color: rgba(0, 232, 123, 0.4);
+  box-shadow: 0 0 16px rgba(0, 232, 123, 0.06);
+}
+
+
 /* ---------- 10. KOLEKSI BATIK DIGITAL ---------- */
 
 .batik-card {
@@ -422,6 +631,71 @@ h1, h2, h3 {
 
 .batik-card:hover::after {
   opacity: 1;
+}
+
+
+/* ---------- 10b. SEJARAH GALLERY (Floating Gold Frame) ---------- */
+
+.sejarah-gallery-card {
+  position: relative;
+  animation: floatCell 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.sejarah-gallery-card:nth-child(1) { animation-delay: 0s; }
+.sejarah-gallery-card:nth-child(2) { animation-delay: 1.5s; }
+.sejarah-gallery-card:nth-child(3) { animation-delay: 3s; }
+
+/* Gold frame border */
+.sejarah-gallery-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(212, 168, 67, 0.25);
+  border-radius: inherit;
+  z-index: 2;
+  pointer-events: none;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.sejarah-gallery-card:hover::before {
+  border-color: rgba(212, 168, 67, 0.5);
+  box-shadow:
+    0 0 20px rgba(212, 168, 67, 0.1),
+    inset 0 0 20px rgba(212, 168, 67, 0.05);
+}
+
+.sejarah-gallery-card img {
+  filter: brightness(0.85) saturate(0.9);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+}
+
+.sejarah-gallery-card:hover img {
+  filter: brightness(1.05) saturate(1.15);
+}
+
+
+/* ---------- 10c. SENTRA KREATIF ---------- */
+
+.sentra-card {
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+
+}
+
+.sentra-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: -450px;
+}
+
+.sentra-card:hover {
+  border-color: rgba(212, 168, 67, 0.22);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(212, 168, 67, 0.06);
 }
 
 
@@ -475,6 +749,7 @@ footer::before {
 @media (max-width: 768px) {
   .floating-title {
     font-size: 3.5rem !important;
+    /* Reduce animation intensity on mobile */
     animation-name: floatTitleMobile;
   }
 
@@ -487,29 +762,16 @@ footer::before {
     border-radius: 14px;
   }
 
+  /* Hide prasasti on small screens for clarity */
   .prasasti-stone {
     display: none;
   }
 
+  /* Disable heavy hovers on touch devices */
   .aksara-cell:hover {
     transform: translateY(-4px) scale(1.03);
   }
 
-  /* --- Tambahan Perbaikan Kartu Batik --- */
-  .batik-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    transform: none !important;
-    box-sizing: border-box;
-  }
-
-  .batik-card img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover;
-  }
   .batik-card:hover img {
     transform: scale(1.03);
   }
@@ -549,7 +811,9 @@ footer::before {
 .prasasti-stone,
 .aksara-cell,
 .batik-card,
-.glass-card {
+.glass-card,
+.sejarah-gallery-card,
+.sentra-card {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   backface-visibility: hidden;

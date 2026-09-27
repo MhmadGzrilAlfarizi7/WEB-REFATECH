@@ -1,160 +1,439 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIAG — Digitalisasi Aksara Kaganga | Museum Digital Interaktif</title>
-<meta name="description" content="DIAGA adalah museum digital interaktif untuk melestarikan Aksara Kaganga warisan budaya Bengkulu melalui teknologi modern.">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{colors:{obsidian:'#0a0a0f',charcoal:'#12121a','glow-emerald':'#00e87b','royal-gold':'#d4a843',gold:'#ffd700','deep-gold':'#b8860b'},fontFamily:{display:['Cinzel','serif'],body:['Inter','sans-serif']}}}};</script>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIAGA — Digitalisasi Aksara Kaganga | Museum Digital Interaktif</title>
+    <meta name="description"
+        content="DIAGA adalah museum digital interaktif untuk melestarikan Aksara Kaganga warisan budaya Bengkulu melalui teknologi modern.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { obsidian: '#0a0a0f', charcoal: '#12121a', 'glow-emerald': '#00e87b', 'royal-gold': '#d4a843', gold: '#ffd700', 'deep-gold': '#b8860b' }, fontFamily: { display: ['Cinzel', 'serif'], body: ['Inter', 'sans-serif'] } } } };</script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-obsidian text-white font-body overflow-x-hidden">
 
-<!-- Particle Canvas -->
-<canvas id="particles" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+    <!-- Particle Canvas -->
+    <canvas id="particles" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
-<!-- SVG Batik Pattern -->
-<svg class="hidden"><defs>
-<pattern id="batikPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-<path d="M30 5 L35 15 L45 15 L37 22 L40 32 L30 26 L20 32 L23 22 L15 15 L25 15Z" fill="none" stroke="rgba(212,168,67,0.07)" stroke-width="0.5"/>
-<circle cx="30" cy="30" r="12" fill="none" stroke="rgba(0,232,123,0.04)" stroke-width="0.5"/>
-<path d="M0 0Q15 15 0 30Q15 15 30 0" fill="none" stroke="rgba(212,168,67,0.05)" stroke-width="0.5"/>
-<path d="M30 30Q45 45 30 60Q45 45 60 30" fill="none" stroke="rgba(212,168,67,0.05)" stroke-width="0.5"/>
-</pattern>
-</defs></svg>
-<div class="fixed inset-0 z-0 pointer-events-none opacity-30"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#batikPattern)"/></svg></div>
+    <!-- SVG Batik Pattern -->
+    <svg class="hidden">
+        <defs>
+            <pattern id="batikPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M30 5 L35 15 L45 15 L37 22 L40 32 L30 26 L20 32 L23 22 L15 15 L25 15Z" fill="none"
+                    stroke="rgba(212,168,67,0.07)" stroke-width="0.5" />
+                <circle cx="30" cy="30" r="12" fill="none" stroke="rgba(0,232,123,0.04)" stroke-width="0.5" />
+                <path d="M0 0Q15 15 0 30Q15 15 30 0" fill="none" stroke="rgba(212,168,67,0.05)" stroke-width="0.5" />
+                <path d="M30 30Q45 45 30 60Q45 45 60 30" fill="none" stroke="rgba(212,168,67,0.05)"
+                    stroke-width="0.5" />
+            </pattern>
+        </defs>
+    </svg>
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-30"><svg width="100%" height="100%">
+            <rect width="100%" height="100%" fill="url(#batikPattern)" />
+        </svg></div>
 
-<!-- Navbar -->
-<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
-<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-<a href="#hero" class="font-display text-2xl font-bold tracking-widest text-royal-gold">DIAGA</a>
-<div class="hidden md:flex gap-8 text-sm tracking-wide">
-<a href="#galeri" class="nav-link hover:text-glow-emerald transition">Galeri Aksara</a>
-<a href="#sejarah" class="nav-link hover:text-glow-emerald transition">Sejarah</a>
-<a href="#konverter" class="nav-link hover:text-glow-emerald transition">Konverter</a>
-<a href="#koleksi" class="nav-link hover:text-glow-emerald transition">Koleksi Batik</a>
-</div>
-<button id="menuBtn" class="md:hidden text-royal-gold text-2xl">☰</button>
-</div>
-<div id="mobileMenu" class="hidden md:hidden flex-col items-center gap-4 pb-6 text-sm">
-<a href="#galeri" class="hover:text-glow-emerald transition">Galeri Aksara</a>
-<a href="#sejarah" class="hover:text-glow-emerald transition">Sejarah</a>
-<a href="#konverter" class="hover:text-glow-emerald transition">Konverter</a>
-<a href="#koleksi" class="hover:text-glow-emerald transition">Koleksi Batik</a>
-</div>
-</nav>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="font-display text-2xl font-bold tracking-widest text-royal-gold">DIAGA</a>
+            <div class="hidden md:flex gap-8 text-sm tracking-wide">
+                <a href="#galeri" class="nav-link hover:text-glow-emerald transition">Galeri Aksara</a>
+                <a href="#sejarah" class="nav-link hover:text-glow-emerald transition">Sejarah</a>
+                <a href="#konverter" class="nav-link hover:text-glow-emerald transition">Konverter</a>
+                <a href="#koleksi" class="nav-link hover:text-glow-emerald transition">Koleksi Batik</a>
+                <a href="#sentra-kreatif" class="nav-link hover:text-glow-emerald transition">Sentra Kreatif</a>
+            </div>
+            <button id="menuBtn" class="md:hidden text-royal-gold text-2xl">☰</button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden flex-col items-center gap-4 pb-6 text-sm">
+            <a href="#galeri" class="hover:text-glow-emerald transition">Galeri Aksara</a>
+            <a href="#sejarah" class="hover:text-glow-emerald transition">Sejarah</a>
+            <a href="#konverter" class="hover:text-glow-emerald transition">Konverter</a>
+            <a href="#koleksi" class="hover:text-glow-emerald transition">Koleksi Batik</a>
+            <a href="#sentra-kreatif" class="hover:text-glow-emerald transition">Sentra Kreatif</a>
+        </div>
+    </nav>
 
-<!-- Hero Section -->
-<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 z-10">
-<p class="text-glow-emerald text-sm tracking-[0.4em] uppercase mb-4 hero-anim">Museum Digital InteraktiF</p>
-<h1 class="font-display text-7xl md:text-9xl font-black tracking-wider hero-anim floating-title">
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-royal-gold via-gold to-deep-gold">DIAGA</span>
-</h1>
-<p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl hero-anim">Digitalisasi Aksara Kaganga — Menjembatani Warisan Abad ke-4 dengan Teknologi Abad ke-21</p>
-<div class="mt-12 hero-anim">
-<a href="#galeri" class="px-8 py-3 border border-royal-gold text-royal-gold rounded-full hover:bg-royal-gold hover:text-obsidian transition-all duration-300 tracking-widest text-sm uppercase">Jelajahi Museum</a>
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 z-10">
+        <p class="text-glow-emerald text-sm tracking-[0.4em] uppercase mb-4 hero-anim">Museum Digital Interaktif</p>
+        <h1 class="font-display text-7xl md:text-9xl font-black tracking-wider hero-anim floating-title">
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-royal-gold via-gold to-deep-gold">DIAGA</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl hero-anim">Digitalisasi Aksara Kaganga — Menjembatani
+            Warisan Abad ke-4 dengan Teknologi Abad ke-21</p>
+        <div class="mt-12 hero-anim">
+            <a href="#galeri"
+                class="px-8 py-3 border border-royal-gold text-royal-gold rounded-full hover:bg-royal-gold hover:text-obsidian transition-all duration-300 tracking-widest text-sm uppercase">Jelajahi
+                Museum</a>
+        </div>
+        <!-- Floating Prasasti -->
+        <div id="prasasti"
+            class="absolute w-48 h-64 md:w-64 md:h-80 prasasti-stone rounded-lg opacity-60 pointer-events-none"
+            style="right:8%;top:20%"></div>
+        <div class="absolute bottom-8 animate-bounce text-royal-gold text-2xl">↓</div>
+    </section>
+
+    <!-- Galeri Aksara Kaganga -->
+    <section id="galeri" class="relative z-10 py-24 px-4 md:px-12">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl text-royal-gold galeri-title">Galeri Aksara Kaganga</h2>
+            <p class="text-gray-400 mt-4 max-w-xl mx-auto">Koleksi lengkap aksara kuno Rejang dari tanah Bengkulu.
+                Sentuh setiap aksara untuk mempelajari cara bacanya.</p>
+        </div>
+        <div id="aksaraGrid"
+            class="max-w-6xl mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
+            <!-- Filled by JS -->
+        </div>
+    </section>
+
+    <!-- Sejarah Interaktif — Batik Kaganga -->
+    <section id="sejarah" class="relative z-10 py-24 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="font-display text-4xl md:text-5xl text-royal-gold">Jejak Sejarah Batik Kaganga</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Perjalanan panjang motif batik yang lahir dari aksara kuno dan flora endemik Bengkulu</p>
+            </div>
+
+            <!-- Timeline Naratif -->
+            <div class="space-y-20">
+                <!-- 1. Asal Usul -->
+                <div class="history-item flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/30 flex items-center justify-center shrink-0">
+                        <span class="text-2xl">🌱</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs tracking-widest uppercase text-glow-emerald bg-glow-emerald/10 px-3 py-1 rounded-full">1985 — 1990</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-royal-gold mb-3">Asal Usul — Lahir di Tanah Rejang</h3>
+                        <p class="text-gray-300 leading-relaxed">Batik Kaganga lahir di Tanah Rejang pada akhir dekade 1980-an, terinspirasi dari gerakan promosi Batik Besurek Bengkulu. Para perajin lokal Rejang Lebong ingin menciptakan identitas batik tersendiri yang membedakan mereka dari Batik Besurek khas Kota Bengkulu.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Inspirasi Motif -->
+                <div class="history-item flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-glow-emerald/20 to-transparent border border-glow-emerald/30 flex items-center justify-center shrink-0">
+                        <span class="text-2xl">🌺</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs tracking-widest uppercase text-royal-gold bg-royal-gold/10 px-3 py-1 rounded-full">Inspirasi Motif</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-glow-emerald mb-3">Perpaduan Aksara Kuno & Rafflesia</h3>
+                        <p class="text-gray-300 leading-relaxed">Keunikan Batik Kaganga terletak pada gabungan dua ikon budaya dan alam: Aksara kuno Kaganga — sistem tulisan warisan Suku Rejang — dipadukan dengan motif Bunga Rafflesia Arnoldii, flora endemik terbesar di dunia yang menjadi kebanggaan Bengkulu.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Tujuan Mulia -->
+                <div class="history-item flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/30 flex items-center justify-center shrink-0">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs tracking-widest uppercase text-glow-emerald bg-glow-emerald/10 px-3 py-1 rounded-full">Tujuan Mulia</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-royal-gold mb-3">Tiga Misi Pelestarian</h3>
+                        <p class="text-gray-300 leading-relaxed">Batik Kaganga diciptakan dengan tiga tujuan mulia: menggalakkan kerajinan daerah sebagai sumber ekonomi kreatif, mempopulerkan kembali aksara Kaganga yang semakin langka penggunaannya, serta mempromosikan ikon Rafflesia Arnoldii kepada dunia melalui seni tekstil.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Masa Kejayaan & Tantangan -->
+                <div class="history-item flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-glow-emerald/20 to-transparent border border-glow-emerald/30 flex items-center justify-center shrink-0">
+                        <span class="text-2xl">⚖️</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs tracking-widest uppercase text-royal-gold bg-royal-gold/10 px-3 py-1 rounded-full">Kejayaan & Tantangan</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-glow-emerald mb-3">Dari Prestise Menuju Produksi Massal</h3>
+                        <p class="text-gray-300 leading-relaxed">Batik Tulis Kaganga pernah menjadi barang mewah berprestise tinggi, dikenakan pada acara-acara penting adat Rejang. Namun, masuknya teknik batik cap untuk memenuhi permintaan seragam instansi secara massal telah menggeser nilai eksklusivitas dan keunikan batik tulis tradisional.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Kondisi Saat Ini -->
+                <div class="history-item flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/30 flex items-center justify-center shrink-0">
+                        <span class="text-2xl">🔍</span>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl flex-1">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs tracking-widest uppercase text-glow-emerald bg-glow-emerald/10 px-3 py-1 rounded-full">Kondisi Saat Ini</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-royal-gold mb-3">Keprihatinan & Harapan Baru</h3>
+                        <p class="text-gray-300 leading-relaxed">Saat ini, batik tulis asli Kaganga semakin sulit ditemukan sebagai suvenir khas Rejang Lebong. Strategi produksi massal batik cap telah mengurangi ketersediaan batik tulis autentik di pasaran. Namun, harapan baru muncul dari para perajin yang tetap setia melestarikan teknik tradisional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galeri Visual Batik Kaganga -->
+            <div class="mt-24">
+                <div class="text-center mb-12">
+                    <h3 class="font-display text-2xl md:text-3xl text-royal-gold">Galeri Visual Batik Kaganga</h3>
+                    <p class="text-gray-500 mt-3 text-sm">Jelajahi detail motif, kain, dan produk batik tulis autentik</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Slot 1: Motif Aksara -->
+                    <div class="sejarah-gallery-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15">
+                        <div class="relative overflow-hidden">
+                            <img src="Pola Aksara.jpg" alt="Detail Motif Aksara Kaganga" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <span class="text-xs tracking-widest uppercase text-glow-emerald">Detail Motif</span>
+                                <h4 class="font-display text-lg text-royal-gold mt-1">Pola Aksara Kaganga</h4>
+                                <p class="text-gray-400 text-xs mt-1">Detail aksara kuno yang diukir menjadi pola batik tulis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slot 2: Contoh Kain -->
+                    <div class="sejarah-gallery-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15">
+                        <div class="relative overflow-hidden">
+                            <img src="Kain Batik Asli.jpg" alt="Kain Batik Tulis Kaganga" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <span class="text-xs tracking-widest uppercase text-glow-emerald">Kain Batik</span>
+                                <h4 class="font-display text-lg text-royal-gold mt-1">Batik Tulis Asli</h4>
+                                <p class="text-gray-400 text-xs mt-1">Kain batik tulis tangan dengan pewarna alami khas Rejang</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slot 3: Produk Kemeja -->
+                    <div class="sejarah-gallery-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.15">
+                        <div class="relative overflow-hidden">
+                            <img src="Batik Emas.jpg" alt="Kemeja Batik Kaganga" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <span class="text-xs tracking-widest uppercase text-glow-emerald">Produk Jadi</span>
+                                <h4 class="font-display text-lg text-royal-gold mt-1">Kemeja Batik Kaganga</h4>
+                                <p class="text-gray-400 text-xs mt-1">Pakaian elegan dari batik tulis Kaganga autentik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konverter Aksara -->
+    <section id="konverter" class="relative z-10 py-24 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-display text-4xl md:text-5xl text-royal-gold mb-4">Konverter Aksara</h2>
+            <p class="text-gray-400 mb-12">Ketik teks Latin dan saksikan transformasi ke Aksara Kaganga secara langsung
+            </p>
+            <div class="glass-card rounded-2xl p-8 space-y-6">
+                <div>
+                    <label class="block text-left text-sm text-gray-400 mb-2 tracking-wide">Masukkan Teks Latin</label>
+                    <input id="latinInput" type="text" placeholder="Contoh: ka ga nga ta da"
+                        class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-lg focus:outline-none focus:border-glow-emerald/50 transition placeholder-gray-600"
+                        autocomplete="off">
+                </div>
+                <div class="text-2xl text-royal-gold">⟱</div>
+                <div>
+                    <label class="block text-left text-sm text-gray-400 mb-2 tracking-wide">Hasil Aksara Kaganga</label>
+                    <div id="kagangaOutput"
+                        class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-6 min-h-[80px] text-4xl text-royal-gold text-center tracking-widest kaganga-font">
+                        <span class="text-gray-600 text-lg">Hasil akan muncul di sini...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Assistant Section -->
+            <div class="ai-assistant-wrapper mt-12">
+                <div class="ai-header flex items-center justify-center gap-3 mb-6">
+                    <div class="ai-icon-pulse">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" class="text-glow-emerald">
+                            <path
+                                d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                            <line x1="10" y1="22" x2="14" y2="22" />
+                            <line x1="9" y1="17" x2="15" y2="17" />
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl text-royal-gold">Asisten AI Kaganga</h3>
+                    <span class="ai-badge text-xs tracking-widest uppercase px-3 py-1 rounded-full">AI-Powered</span>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">Tanyakan apa saja tentang Aksara Kaganga — sejarah, makna, cara
+                    penulisan, dan budaya Rejang Bengkulu</p>
+
+                <div class="glass-card rounded-2xl p-6 space-y-5">
+                    <!-- Chat Messages Area -->
+                    <div id="aiChatMessages"
+                        class="ai-chat-area rounded-xl p-4 min-h-[120px] max-h-[400px] overflow-y-auto space-y-4">
+                        <div class="ai-welcome-msg flex items-start gap-3">
+                            <div class="ai-avatar shrink-0">AI</div>
+                            <div class="ai-bubble">
+                                <p>Halo! Saya asisten AI untuk Aksara Kaganga. 👋</p>
+                                <p class="mt-2 text-gray-400 text-sm">Anda bisa bertanya tentang sejarah aksara, cara
+                                    membaca, makna simbol, atau budaya Rejang Bengkulu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="flex gap-3">
+                        <input id="aiInput" type="text" placeholder="Tanyakan tentang Aksara Kaganga..."
+                            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-glow-emerald/50 transition placeholder-gray-600"
+                            autocomplete="off">
+                        <button id="aiSendBtn"
+                            class="ai-send-btn px-5 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 flex items-center gap-2"
+                            aria-label="Kirim pertanyaan ke AI">
+                            <span>Tanya AI</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="text-gray-600 text-xs text-center">Gratis & Tanpa Batas · Respons dalam Bahasa Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Koleksi Batik Digital -->
+    <section id="koleksi" class="relative z-10 py-24 px-4">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl text-royal-gold">Koleksi Batik Digital</h2>
+            <p class="text-gray-400 mt-4 max-w-xl mx-auto">Jelajahi keindahan batik tradisional Bengkulu dalam format
+                digital beresolusi tinggi</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8"
+                data-tilt-glare data-tilt-max-glare="0.2">
+                <img src="Model Batik.jpg" alt="Batik Rafflesia Bengkulu"
+                    class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="p-6">
+                    <h3 class="font-display text-lg text-royal-gold">Batik Motif Rafflesia</h3>
+                    <p class="text-gray-400 text-sm mt-2">Motif bunga Rafflesia Arnoldii yang menjadi ikon flora
+                        Bengkulu, dipadukan dengan ornamen tradisional Rejang.</p>
+                </div>
+            </div>
+            <div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8"
+                data-tilt-glare data-tilt-max-glare="0.2">
+                <img src="Kemeja Emas.jpg" alt="Batik Aksara Emas"
+                    class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="p-6">
+                    <h3 class="font-display text-lg text-royal-gold">Batik Aksara Emas</h3>
+                    <p class="text-gray-400 text-sm mt-2">Aksara Kaganga bertinta emas di atas kain sutra biru tua —
+                        perpaduan seni kaligrafi dan seni tekstil Bengkulu.</p>
+                </div>
+            </div>
+            <div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8"
+                data-tilt-glare data-tilt-max-glare="0.2">
+                <img src="Kain Upacara.jpg" alt="Kain Batik Upacara"
+                    class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="p-6">
+                    <h3 class="font-display text-lg text-royal-gold">Kain Upacara Adat</h3>
+                    <p class="text-gray-400 text-sm mt-2">Kain songket seremonial dengan benang emas yang digunakan
+                        dalam upacara adat masyarakat Rejang.</p>
+                </div>
+            </div>
+            <div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8"
+                data-tilt-glare data-tilt-max-glare="0.2">
+                <img src="Songket.jpg" alt="Songket Bengkulu"
+                    class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="p-6">
+                    <h3 class="font-display text-lg text-royal-gold">Songket Bengkulu</h3>
+                    <p class="text-gray-400 text-sm mt-2">Songket tradisional dengan motif geometris khas Bengkulu yang
+                        ditenun menggunakan teknik turun-temurun.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sentra Kreatif — Arumbatik Roemah -->
+    <section id="sentra-kreatif" class="relative z-10 py-24 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl text-royal-gold">Sentra Kreatif</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Pusat pembelajaran dan produksi Batik Tulis Kaganga autentik di jantung Rejang Lebong</p>
+            </div>
+            <div class="glass-card rounded-3xl overflow-hidden sentra-card">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <!-- Foto Edukasi -->
+                    <div class="relative overflow-hidden group">
+                        <img src="Bagian Terakhir.jpg" alt="Kegiatan edukasi batik di Arumbatik Roemah" class="w-full h-full min-h-[350px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-obsidian/60 lg:block hidden"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian/70 via-transparent to-transparent lg:hidden"></div>
+                        <!-- Floating badge -->
+                        <div class="absolute top-5 left-5 glass-card px-4 py-2 rounded-full">
+                            <span class="text-xs tracking-widest uppercase text-glow-emerald font-semibold">Pusat Edukasi</span>
+                        </div>
+                    </div>
+                    <!-- Info Content -->
+                    <div class="p-8 lg:p-12 flex flex-col justify-center space-y-6">
+                        <div>
+                            <span class="text-xs tracking-widest uppercase text-glow-emerald bg-glow-emerald/10 px-3 py-1 rounded-full">Solusi Nyata</span>
+                        </div>
+                        <h3 class="font-display text-3xl text-royal-gold leading-snug">Arumbatik Roemah</h3>
+                        <p class="text-gray-300 leading-relaxed">Arumbatik Roemah adalah pusat pembelajaran dan produksi Batik Tulis Kaganga yang autentik. Di sini, masyarakat dapat belajar langsung teknik membatik tulis tradisional, mengenal makna setiap motif aksara Kaganga, serta berkontribusi dalam melestarikan warisan budaya Rejang Lebong.</p>
+                        <!-- Lokasi -->
+                        <div class="flex items-start gap-4 glass-card p-5 rounded-xl">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/20 flex items-center justify-center shrink-0">
+                                <span class="text-xl">📍</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-royal-gold mb-1">Lokasi</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">Jl. Batu Galing No. 41, Curup Tengah,<br>Kabupaten Rejang Lebong, Bengkulu</p>
+                            </div>
+                        </div>
+                        <!-- Kegiatan -->
+                        <div class="grid grid-cols-2 gap-3 mt-2">
+                            <div class="text-center glass-card p-4 rounded-xl">
+                                <span class="text-2xl block mb-2">🎨</span>
+                                <span class="text-xs text-gray-400">Workshop Membatik</span>
+                            </div>
+                            <div class="text-center glass-card p-4 rounded-xl">
+                                <span class="text-2xl block mb-2">📖</span>
+                                <span class="text-xs text-gray-400">Edukasi Aksara</span>
+                            </div>
+                            <div class="text-center glass-card p-4 rounded-xl">
+                                <span class="text-2xl block mb-2">🧵</span>
+                                <span class="text-xs text-gray-400">Produksi Batik Tulis</span>
+                            </div>
+                            <div class="text-center glass-card p-4 rounded-xl">
+                                <span class="text-2xl block mb-2">🛍️</span>
+                                <span class="text-xs text-gray-400">Galeri & Penjualan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Tombol Informasi Lebih Lanjut -->
+<div class="text-center mt-12">
+    <a href="https://curupkami.blogspot.com/2009/02/batik-kaganga.html" target="_blank"
+        class="inline-block px-10 py-4 border border-royal-gold text-royal-gold rounded-full hover:bg-royal-gold hover:text-obsidian transition-all duration-300 tracking-widest text-sm uppercase font-semibold">
+        Informasi Lebih Lanjut
+    </a>
 </div>
 
-<!-- Floating Prasasti -->
-<div id="prasasti" class="absolute w-48 h-64 md:w-64 md:h-80 prasasti-stone rounded-lg opacity-60 pointer-events-none" style="right:8%;top:20%"></div>
-<div class="absolute bottom-8 animate-bounce text-royal-gold text-2xl">↓</div>
-</section>
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/5 py-12 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-display text-2xl text-royal-gold tracking-widest mb-3">DIAGA</p>
+            <p class="text-gray-500 text-sm">Digitalisasi Aksara Kaganga — Melestarikan Warisan Budaya Bengkulu</p>
+            <p class="text-gray-600 text-xs mt-4">© 2026 DIAGA Project. Dibuat dengan ❤ untuk pelestarian budaya
+                Nusantara.</p>
+        </div>
+    </footer>
 
-<!-- Galeri Aksara Kaganga -->
-<section id="galeri" class="relative z-10 py-24 px-4 md:px-12">
-<div class="text-center mb-16">
-<h2 class="font-display text-4xl md:text-5xl text-royal-gold galeri-title">Galeri Aksara Kaganga</h2>
-<p class="text-gray-400 mt-4 max-w-xl mx-auto">Koleksi lengkap aksara kuno Rejang dari tanah Bengkulu. Sentuh setiap aksara untuk mempelajari cara bacanya.</p>
-</div>
-<div id="aksaraGrid" class="max-w-6xl mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
-<!-- Filled by JS -->
-</div>
-</section>
-
-<!-- Sejarah Interaktif -->
-<section id="sejarah" class="relative z-10 py-24 px-4">
-<div class="max-w-4xl mx-auto space-y-32">
-<div class="text-center mb-8">
-<h2 class="font-display text-4xl md:text-5xl text-royal-gold">Jejak Sejarah</h2>
-<p class="text-gray-400 mt-4">Perjalanan panjang Aksara Kaganga melintasi masa</p>
-</div>
-<div class="history-item flex flex-col md:flex-row items-center gap-8">
-<div class="w-24 h-24 rounded-full bg-gradient-to-br from-glow-emerald/20 to-transparent border border-glow-emerald/30 flex items-center justify-center text-3xl font-display text-glow-emerald shrink-0">IV</div>
-<div class="glass-card p-8 rounded-2xl flex-1"><h3 class="text-xl font-bold text-royal-gold mb-3">Abad ke-4 — Asal Mula</h3><p class="text-gray-300 leading-relaxed">Aksara Kaganga dipercaya berasal dari keluarga aksara Brahmi yang menyebar ke Nusantara melalui jalur perdagangan India. Aksara ini berkembang di tanah Rejang, Bengkulu, menjadi sistem tulisan yang unik dan khas.</p></div>
-</div>
-<div class="history-item flex flex-col md:flex-row-reverse items-center gap-8">
-<div class="w-24 h-24 rounded-full bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/30 flex items-center justify-center text-3xl font-display text-royal-gold shrink-0">XIV</div>
-<div class="glass-card p-8 rounded-2xl flex-1"><h3 class="text-xl font-bold text-glow-emerald mb-3">Abad ke-14 — Masa Kejayaan</h3><p class="text-gray-300 leading-relaxed">Pada masa kerajaan Rejang, aksara Kaganga digunakan secara luas pada kulit kayu, tanduk kerbau, dan bambu. Aksara ini menjadi media komunikasi, hukum adat, dan sastra yang mengikat masyarakat Rejang.</p></div>
-</div>
-<div class="history-item flex flex-col md:flex-row items-center gap-8">
-<div class="w-24 h-24 rounded-full bg-gradient-to-br from-glow-emerald/20 to-transparent border border-glow-emerald/30 flex items-center justify-center text-2xl font-display text-glow-emerald shrink-0">XXI</div>
-<div class="glass-card p-8 rounded-2xl flex-1"><h3 class="text-xl font-bold text-royal-gold mb-3">Abad ke-21 — Digitalisasi</h3><p class="text-gray-300 leading-relaxed">Melalui proyek DIAGA, Aksara Kaganga dihidupkan kembali secara digital. Teknologi modern memungkinkan generasi baru mengenal, mempelajari, dan melestarikan warisan budaya tak benda ini tanpa batas ruang dan waktu.</p></div>
-</div>
-</div>
-</section>
-
-<!-- Konverter Aksara -->
-<section id="konverter" class="relative z-10 py-24 px-4">
-<div class="max-w-3xl mx-auto text-center">
-<h2 class="font-display text-4xl md:text-5xl text-royal-gold mb-4">Konverter Aksara</h2>
-<p class="text-gray-400 mb-12">Ketik teks Latin dan saksikan transformasi ke Aksara Kaganga secara langsung</p>
-<div class="glass-card rounded-2xl p-8 space-y-6">
-<div>
-<label class="block text-left text-sm text-gray-400 mb-2 tracking-wide">Masukkan Teks Latin</label>
-<input id="latinInput" type="text" placeholder="Contoh: ka ga nga ta da" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-lg focus:outline-none focus:border-glow-emerald/50 transition placeholder-gray-600" autocomplete="off">
-</div>
-<div class="text-2xl text-royal-gold">⟱</div>
-<div>
-<label class="block text-left text-sm text-gray-400 mb-2 tracking-wide">Hasil Aksara Kaganga</label>
-<div id="kagangaOutput" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-6 min-h-[80px] text-4xl text-royal-gold text-center tracking-widest kaganga-font">
-<span class="text-gray-600 text-lg">Hasil akan muncul di sini...</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Koleksi Batik Digital -->
-<section id="koleksi" class="relative z-10 py-24 px-4">
-<div class="text-center mb-16">
-<h2 class="font-display text-4xl md:text-5xl text-royal-gold">Koleksi Batik Digital</h2>
-<p class="text-gray-400 mt-4 max-w-xl mx-auto">Jelajahi keindahan batik tradisional Bengkulu dalam format digital beresolusi tinggi</p>
-</div>
-<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-<img src="batik_rafflesia.png" alt="Batik Rafflesia Bengkulu" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
-<div class="p-6"><h3 class="font-display text-lg text-royal-gold">Batik Motif Rafflesia</h3><p class="text-gray-400 text-sm mt-2">Motif bunga Rafflesia Arnoldii yang menjadi ikon flora Bengkulu, dipadukan dengan ornamen tradisional Rejang.</p></div>
-</div>
-<div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-<img src="batik_aksara_emas.png" alt="Batik Aksara Emas" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
-<div class="p-6"><h3 class="font-display text-lg text-royal-gold">Batik Aksara Emas</h3><p class="text-gray-400 text-sm mt-2">Aksara Kaganga bertinta emas di atas kain sutra biru tua — perpaduan seni kaligrafi dan seni tekstil Bengkulu.</p></div>
-</div>
-<div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-<img src="batik_kain_ceremonial.png" alt="Kain Batik Upacara" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
-<div class="p-6"><h3 class="font-display text-lg text-royal-gold">Kain Upacara Adat</h3><p class="text-gray-400 text-sm mt-2">Kain songket seremonial dengan benang emas yang digunakan dalam upacara adat masyarakat Rejang.</p></div>
-</div>
-<div class="batik-card glass-card rounded-2xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-<img src="batik_songket.png" alt="Songket Bengkulu" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
-<div class="p-6"><h3 class="font-display text-lg text-royal-gold">Songket Bengkulu</h3><p class="text-gray-400 text-sm mt-2">Songket tradisional dengan motif geometris khas Bengkulu yang ditenun menggunakan teknik turun-temurun.</p></div>
-</div>
-</div>
-</section>
-
-<!-- Footer -->
-<footer class="relative z-10 border-t border-white/5 py-12 text-center">
-<div class="max-w-4xl mx-auto px-4">
-<p class="font-display text-2xl text-royal-gold tracking-widest mb-3">DIAGA</p>
-<p class="text-gray-500 text-sm">Digitalisasi Aksara Kaganga — Melestarikan Warisan Budaya Bengkulu</p>
-<p class="text-gray-600 text-xs mt-4">© 2026 DIAGA Project. Dibuat dengan ❤ untuk pelestarian budaya Nusantara.</p>
-</div>
-</footer>
-
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-<script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
