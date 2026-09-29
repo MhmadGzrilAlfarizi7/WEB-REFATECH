@@ -536,6 +536,7 @@ h1, h2, h3 {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  font-size: 0.75rem;
 }
 
 .ai-send-btn::before {
@@ -581,6 +582,27 @@ h1, h2, h3 {
   box-shadow: 0 0 16px rgba(0, 232, 123, 0.06);
 }
 
+#aiInput {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  /*Fix Input Chat AI agar tidak terdorong keluar layar HP */
+#aiInput {
+  flex: 1 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .ai-bubble, 
+  .user-bubble {
+    max-width: 92% !important;
+    font-size: 0.82rem;
+    padding: 10px 12px;
+  }
+
+}
 
 /* ---------- 10. KOLEKSI BATIK DIGITAL ---------- */
 
