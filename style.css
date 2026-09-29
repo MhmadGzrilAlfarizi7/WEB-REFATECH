@@ -220,11 +220,12 @@ h1, h2, h3 {
   width: 200%;
   height: 200%;
   background: linear-gradient(
-    45deg,
+    160deg,
     transparent 40%,
-    rgba(212, 168, 67, 0.04) 50%,
+    rgba(140, 140, 160, 0.15) 60%,
+    rgba(200, 200, 220, 0.06) 100%,
     transparent 60%
-  );
+  ) !important;
   animation: stoneScan 8s linear infinite;
 }
 
