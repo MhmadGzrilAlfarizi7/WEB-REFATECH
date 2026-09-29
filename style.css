@@ -176,7 +176,7 @@ h1, h2, h3 {
     rgba(184, 134, 11, 0.15) 60%,
     rgba(212, 168, 67, 0.08) 100%
   );
-  border: 1px solid rgba(212, 168, 67, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
 
   /* Multi-layer glow — seolah batu melayang bercahaya */
