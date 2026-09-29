@@ -77,10 +77,12 @@ function initSpaceDustParticles() {
   const ctx = canvas.getContext('2d');
 
   let width, height;
-  const PARTICLE_COUNT = 80;       // Jumlah debu
-  const MAX_RADIUS = 2.2;          // Radius maksimum
-  const DRIFT_SPEED = 0.35;        // Kecepatan drift vertikal
-  const TWINKLE_RATE = 0.015;      // Kecepatan kedip alpha
+  const PARTICLE_COUNT = 45;       // Jumlah huruf melayang (diatur 45 agar rapi & tidak sesak)
+  const DRIFT_SPEED = 0.45;        // Kecepatan drift vertikal ke atas
+  const TWINKLE_RATE = 0.012;      // Kecepatan kedip alpha
+
+  // Daftar karakter Aksara Kaganga dari dataset utama
+  const aksaraChars = AKSARA_KAGANGA.map(item => item.char);
 
   // Palet warna partikel — emas & emerald
   const PALETTE = [
@@ -99,24 +101,25 @@ function initSpaceDustParticles() {
     height = canvas.height = window.innerHeight;
   }
 
-  /** Buat satu partikel baru */
-  function createParticle(startAtTop) {
+  /** Buat satu partikel huruf baru */
+  function createParticle(startAtBottom) {
     const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+    const char = aksaraChars[Math.floor(Math.random() * aksaraChars.length)];
     return {
       x: Math.random() * width,
-      y: startAtTop ? height + Math.random() * 40 : Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.25,          // Drift horizontal ringan
-      vy: -(Math.random() * DRIFT_SPEED + 0.08),  // Naik perlahan (anti-gravity)
-      radius: Math.random() * MAX_RADIUS + 0.4,
+      y: startAtBottom ? height + Math.random() * 40 : Math.random() * height,
+      char: char,
+      fontSize: Math.floor(Math.random() * 12) + 16, // Ukuran huruf 16px - 28px
+      vx: (Math.random() - 0.5) * 0.25,               // Drift horizontal ringan
+      vy: -(Math.random() * DRIFT_SPEED + 0.12),      // Naik perlahan ke atas
       color: color,
-      alpha: Math.random() * 0.5 + 0.1,
-      alphaDir: Math.random() > 0.5 ? 1 : -1,       // Arah kedip
-      // Variasi kecepatan kedip per partikel
+      alpha: Math.random() * 0.4 + 0.1,               // Transparan samar (10% - 50%)
+      alphaDir: Math.random() > 0.5 ? 1 : -1,         // Arah kedip
       twinkleSpeed: TWINKLE_RATE * (0.5 + Math.random()),
     };
   }
 
-  /** Inisialisasi seluruh partikel */
+  /** Inisialisasi seluruh partikel huruf */
   function seedParticles() {
     particles = [];
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -131,19 +134,17 @@ function initSpaceDustParticles() {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
-      // Gambar partikel sebagai lingkaran bercahaya
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      // Setting font & pendaran cahaya (glow)
+      ctx.font = `${p.fontSize}px 'Noto Sans Rejang', 'Cinzel', serif`;
       ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${p.alpha})`;
-      ctx.fill();
+      ctx.shadowColor = `rgba(${p.color.r},${p.color.g},${p.color.b},${p.alpha * 0.6})`;
+      ctx.shadowBlur = p.fontSize > 22 ? 12 : 6;
 
-      // Tambahan glow halo (radius lebih besar, alpha lebih rendah)
-      if (p.radius > 1.2) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${p.alpha * 0.15})`;
-        ctx.fill();
-      }
+      // Gambar huruf aksara ke canvas
+      ctx.fillText(p.char, p.x, p.y);
+
+      // Reset shadowBlur demi menjaga performa tinggi
+      ctx.shadowBlur = 0;
 
       // Update posisi — anti-gravity drift
       p.x += p.vx;
@@ -151,16 +152,16 @@ function initSpaceDustParticles() {
 
       // Efek kedip (twinkle)
       p.alpha += p.alphaDir * p.twinkleSpeed;
-      if (p.alpha >= 0.65) { p.alpha = 0.65; p.alphaDir = -1; }
-      if (p.alpha <= 0.05) { p.alpha = 0.05; p.alphaDir = 1; }
+      if (p.alpha >= 0.55) { p.alpha = 0.55; p.alphaDir = -1; }
+      if (p.alpha <= 0.08) { p.alpha = 0.08; p.alphaDir = 1; }
 
-      // Recycle partikel yang keluar layar
-      if (p.y < -20) {
+      // Recycle partikel yang sudah melayang ke atas melewati layar
+      if (p.y < -30) {
         particles[i] = createParticle(true);
       }
-      // Wrap horizontal
-      if (p.x < -20) p.x = width + 10;
-      if (p.x > width + 20) p.x = -10;
+      // Wrap horizontal jika bergerak terlalu jauh ke pinggir
+      if (p.x < -30) p.x = width + 20;
+      if (p.x > width + 30) p.x = -20;
     }
 
     requestAnimationFrame(render);
