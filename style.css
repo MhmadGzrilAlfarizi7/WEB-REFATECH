@@ -223,7 +223,7 @@ h1, h2, h3 {
     160deg,
     #0a0a0f 0%,
     #181820 30%,
-    rgba(212, 168, 67, 0.04) 50%,
+    rgba(138, 130, 111, 0.04) 50%,
     transparent 60%
   )!important;
   animation: stoneScan 8s linear infinite;
