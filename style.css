@@ -206,8 +206,8 @@ h1, h2, h3 {
   font-size: 1.6rem;
   letter-spacing: 0.4em;
   line-height: 2;
-  color: rgba(212, 168, 67, 0.2);
-  text-shadow: 0 0 18px rgba(212, 168, 67, 0.15);
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important;
   animation: pulseGlow 5s ease-in-out infinite;
 }
 
