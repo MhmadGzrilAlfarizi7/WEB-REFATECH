@@ -847,3 +847,47 @@ footer::before {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
+
+/* Ambient Music Toggle */
+.music-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.music-toggle-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  border-color: rgba(0, 232, 123, 0.5);
+  box-shadow: 0 0 20px rgba(0, 232, 123, 0.3);
+}
+
+/* Animasi memutar saat musik aktif */
+.music-toggle-btn.playing .music-icon {
+  animation: spinMusic 3s linear infinite;
+}
+
+.music-toggle-btn.playing {
+  border-color: rgba(0, 232, 123, 0.6);
+  color: #00e87b;
+}
+
+@keyframes spinMusic {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

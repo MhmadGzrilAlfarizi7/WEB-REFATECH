@@ -429,6 +429,16 @@
         </div>
     </footer>
 
+    <!-- Ambient Music Floating Player -->
+    <audio id="ambientAudio" loop preload="none">
+    <source src="ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Toggle Ambient Music" title="Putar Musik Ambient">
+  <span id="musicIcon" class="music-icon">🎵</span>
+  <span class="music-text hidden md:inline">Music</span>
+</button>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

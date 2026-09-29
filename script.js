@@ -785,3 +785,32 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initGSAPAnimations, 80);
   });
 });
+
+// Modul 7: Musik ambient latar belakang
+function initAmbientMusic() {
+  const audio = document.getElementById('ambientAudio');
+  const btn = document.getElementById('musicToggleBtn');
+  const icon = document.getElementById('musicIcon');
+  if (!audio || !btn) return;
+
+  btn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.volume = 0.4; // Set volume 40% agar tidak mengagetkan
+      audio.play().then(() => {
+        btn.classList.add('playing');
+        icon.textContent = '🎶';
+      }).catch(err => {
+        console.warn('Gagal memutar audio:', err);
+      });
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+      icon.textContent = '🎵';
+    }
+  });
+}
+
+// Jalankan saat DOM siap
+document.addEventListener('DOMContentLoaded', () => {
+  initAmbientMusic();
+});
