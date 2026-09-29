@@ -173,8 +173,8 @@ h1, h2, h3 {
     160deg,
     #0a0a0f 0%,
     #1a150c 30%,
-    rgba(184, 134, 11, 0.15) 60%,
-    rgba(212, 168, 67, 0.08) 100%
+    rgba(117, 111, 96, 0.15) 60%,
+    rgba(126, 119, 104, 0.08) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   border-radius: 12px;
@@ -222,10 +222,9 @@ h1, h2, h3 {
   background: linear-gradient(
     160deg,
     transparent 40%,
-    rgba(140, 140, 160, 0.15) 60%,
-    rgba(200, 200, 220, 0.06) 100%,
+    rgba(212, 168, 67, 0.04) 50%,
     transparent 60%
-  ) !important;
+  );
   animation: stoneScan 8s linear infinite;
 }
 
