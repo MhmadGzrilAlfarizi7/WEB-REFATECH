@@ -86,11 +86,7 @@ function initSpaceDustParticles() {
 
   // Palet warna partikel — emas & emerald
   const PALETTE = [
-    { r: 212, g: 168, b: 67 },    // Royal Gold
-    { r: 255, g: 215, b: 0 },    // Bright Gold
-    { r: 184, g: 134, b: 11 },    // Deep Gold
-    { r: 0, g: 232, b: 123 },    // Glow Emerald
-    { r: 0, g: 180, b: 100 },    // Deep Emerald
+    { r: 255, g: 255, b: 255 }, // Putih terang
   ];
 
   let particles = [];
